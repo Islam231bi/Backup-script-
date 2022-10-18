@@ -2,6 +2,9 @@
 
 # Backup script to a certain directory in a backup directory every specified time interval
 
+echo "Welcome to Backup script"
+echo "CTRL^C to terminate"
+
 ### Validation ###
 if [$# -ne 4]
 then
