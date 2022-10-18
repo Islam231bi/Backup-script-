@@ -9,6 +9,18 @@ then
   exit
 fi
 
+if [[ ! "$interval" =~ ^[0-9]+$ ]]
+then
+  echo "Please provide a number for the time interval"
+  exit
+fi
+
+if [[ ! "$max" =~ ^[0-9]+$ ]]
+then
+  echo "Please provide a number for the max backups"
+  exit
+fi
+
 
 ### Command line args ###
 
