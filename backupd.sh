@@ -35,7 +35,38 @@ touch  directory-info.new
 > changes_made.txt
 
 
+while [ 1 ]
+do
+     sleep $interval
 
+     # Modification info for the dir
+     ls -lr $dir > directory-info.new
 
+     # Determine if changes made to directory and redirecting changes to a file
+     diff directory-info.last directory-info.new >> changes_made.txt
 
+     if [ $? -eq 1 ]
+     then
+       if [ $cnt -lt $max ]
+       then
+	 date=$(date +%F)
+	 hour=$(date +%H)
+	 min=$(date +%M)
+	 sec=$(date +%S)
+
+	 cp -R $dir $backupdir$date"-"$hour"-"$min"-"$sec
+
+	 cnt=$((cnt + 1))
+       else
+	 files=($backupdir/*)
+	 rm -rf $files
+	 date=$(date +%F)
+	 hour=$(date +%H)
+	 min=$(date +%M)
+	 sec=$(date +%S)
+	 cp -R $dir $backupdir$date"-"$hour"-"$min"-"$sec
+       fi
+       cp directory-info.new directory-info.last
+     fi
+done
 
