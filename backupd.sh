@@ -2,6 +2,14 @@
 
 # Backup script to a certain directory in a backup directory every specified time interval
 
+### Validation ###
+if [$# -ne 4]
+then
+  echo "please provide correct number of arguments"
+  exit
+fi
+
+
 ### Command line args ###
 
 dir=$1
@@ -19,7 +27,7 @@ min=$(date +%M)
 sec=$(date +%S)
 
 
-if [ $cnt -lt $max ]                                                                                                 
+if [ $cnt -lt $max ]                                                                                           
 then 
   cp -R $dir $backupdir$date"-"$hour"-"$min"-"$sec
   cnt=$((cnt+1))
