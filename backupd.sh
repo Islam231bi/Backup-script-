@@ -6,12 +6,20 @@ echo "Welcome to Backup script"
 echo "CTRL^C to terminate"
 
 ### Validation ###
-if [$# -ne 4]
+if [ $# -ne 4 ]
 then
   echo "please provide correct number of arguments"
   exit
 fi
 
+### Command line args ###
+
+dir=$1
+backupdir=$2
+interval=$3
+max=$4
+
+### Validation ###
 if [[ ! "$interval" =~ ^[0-9]+$ ]]
 then
   echo "Please provide a number for the time interval"
@@ -23,14 +31,6 @@ then
   echo "Please provide a number for the max backups"
   exit
 fi
-
-
-### Command line args ###
-
-dir=$1
-backupdir=$2
-interval=$3
-max=$4
 
 # Files count in the backup dir
 cnt=$( ls $backupdir | wc -l)
